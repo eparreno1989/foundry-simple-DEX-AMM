@@ -51,12 +51,7 @@ contract SimpleAMM {
     /// @param tokenIn The address of the token deposited into the pool.
     /// @param amountIn The amount of tokenIn deposited.
     /// @param amountOut The amount of the destination token returned to the user.
-    event Swap(
-        address indexed user,
-        address indexed tokenIn,
-        uint256 amountIn,
-        uint256 amountOut
-    );
+    event Swap(address indexed user, address indexed tokenIn, uint256 amountIn, uint256 amountOut);
 
     // ------------------------------------------------------------------------
     // CUSTOM ERRORS
@@ -160,10 +155,7 @@ contract SimpleAMM {
         if (totalSupply == 0) {
             shares = _sqrt(_amount0 * _amount1);
         } else {
-            shares = _min(
-                (_amount0 * totalSupply) / reserve0,
-                (_amount1 * totalSupply) / reserve1
-            );
+            shares = _min((_amount0 * totalSupply) / reserve0, (_amount1 * totalSupply) / reserve1);
         }
 
         if (shares == 0) revert InsufficientLiquidityMinted();
@@ -205,14 +197,8 @@ contract SimpleAMM {
         if (_amountIn == 0) revert InsufficientAmount();
 
         bool isToken0 = _tokenIn == address(token0);
-        (
-            IERC20 tokenIn,
-            IERC20 tokenOut,
-            uint256 reserveIn,
-            uint256 reserveOut  
-        ) = isToken0
-            ? (token0, token1, reserve0, reserve1)
-            : (token1, token0, reserve1, reserve0);
+        (IERC20 tokenIn, IERC20 tokenOut, uint256 reserveIn, uint256 reserveOut) =
+            isToken0 ? (token0, token1, reserve0, reserve1) : (token1, token0, reserve1, reserve0);
 
         // 1. Transfer input token from user wallet to the contract
         tokenIn.safeTransferFrom(msg.sender, address(this), _amountIn);

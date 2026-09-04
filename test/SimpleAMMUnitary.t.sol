@@ -21,12 +21,7 @@ contract SimpleAMMTest is Test {
     /// @dev Event declarations matching SimpleAMM for event emission testing with vm.expectEmit.
     event AddLiquidity(address indexed provider, uint256 sharesMinted);
     event RemoveLiquidity(address indexed provider, uint256 sharesBurned);
-    event Swap(
-        address indexed user,
-        address indexed tokenIn,
-        uint256 amountIn,
-        uint256 amountOut
-    );
+    event Swap(address indexed user, address indexed tokenIn, uint256 amountIn, uint256 amountOut);
 
     /// @notice Sets up the testing environment before each test execution.
     /// @dev Deploys mock ERC20 tokens, sorts token addresses, initializes SimpleAMM, mints balances, and sets approvals.

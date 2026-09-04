@@ -54,14 +54,10 @@ contract SimpleAMMInvariantTest is Test {
     /// @dev Protects against insolvency caused by unauthorized withdrawals or improper reserve accounting.
     function invariant_solvencyReservesMatchBalances() public view {
         assertGe(
-            token0.balanceOf(address(amm)),
-            amm.reserve0(),
-            "Solvency violation: Token0 balance lower than reserve0"
+            token0.balanceOf(address(amm)), amm.reserve0(), "Solvency violation: Token0 balance lower than reserve0"
         );
         assertGe(
-            token1.balanceOf(address(amm)),
-            amm.reserve1(),
-            "Solvency violation: Token1 balance lower than reserve1"
+            token1.balanceOf(address(amm)), amm.reserve1(), "Solvency violation: Token1 balance lower than reserve1"
         );
     }
 
@@ -72,11 +68,7 @@ contract SimpleAMMInvariantTest is Test {
 
         if (kLast > 0) {
             uint256 kCurrent = amm.reserve0() * amm.reserve1();
-            assertGe(
-                kCurrent,
-                kLast,
-                "Invariant violation: Constant product k decreased after swap"
-            );
+            assertGe(kCurrent, kLast, "Invariant violation: Constant product k decreased after swap");
         }
     }
 
