@@ -54,7 +54,7 @@ The stateful fuzz testing suite validates three fundamental invariants across ra
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/your-username/foundry-simple-DEX-AMM.git
+git clone https://github.com/eparreno1989/foundry-simple-DEX-AMM.git
 cd foundry-simple-DEX-AMM
 forge build
 ```
